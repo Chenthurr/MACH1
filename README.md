@@ -107,4 +107,15 @@ mach10-fullstack/
    │  │  └─ main.css
    ├─ package.json
    └─ vite.config.js
+Run the complete stack
+1) Start containers
+docker-compose up --build
+
+2) Run dashboard (in frontend/)
+npm install
+npm run dev
+
+
+Dashboard opens at:
+👉 http://localhost:5173
 
