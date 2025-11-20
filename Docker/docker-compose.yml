@@ -1,0 +1,58 @@
+version: '3.8'
+services:
+  broker:
+    image: eclipse-mosquitto:2.0
+    ports:
+      - "1883:1883"
+    volumes:
+      - mosquitto-data:/mosquitto/data
+      - mosquitto-conf:/mosquitto/config
+
+  cloud:
+    build:
+      context: ./cloud
+      dockerfile: Dockerfile.cloud
+    container_name: cloud
+    depends_on:
+      - broker
+      - signal_controller
+    networks:
+      - machnet
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - "8080:8080"
+
+  signal_controller:
+    build:
+      context: ./cloud
+      dockerfile: Dockerfile.cloud
+    command: ["python", "signal_controller.py"]
+    container_name: signal_controller
+    networks:
+      - machnet
+    ports:
+      - "8090:8090"
+
+  edge:
+    build:
+      context: ./edge
+      dockerfile: Dockerfile.edge
+    container_name: edge
+    depends_on:
+      - cloud
+      - broker
+    networks:
+      - machnet
+    volumes:
+      - ./edge:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+
+volumes:
+  mosquitto-data:
+  mosquitto-conf:
+
+networks:
+  machnet:
+    driver: bridge
