@@ -89,4 +89,22 @@ To point to real RTSP, replace camera.source with rtsp://<user>:<pass>@camera-ip
 Tune rules.preempt_cooldown to avoid frequent toggles.
 
 10) Example minimal commit message for this repo
-Initial fullstack scaffold: edge (YOLOv8+OpenCV, local rule engine), cloud (orchestrator + signal controller mock), docker-compose and docs for hybrid prototype.
+Initial fullstack scaffold: edge (YOLOv8+OpenCV, local rule engine), cloud (orchestrator + signal controller mock), docker-compose and docs for hybrid prototype
+Frontend
+mach10-fullstack/
+└─ frontend/
+   ├─ src/
+   │  ├─ App.jsx
+   │  ├─ api.js
+   │  ├─ components/
+   │  │  ├─ LiveEvents.jsx
+   │  │  ├─ IntersectionMap.jsx
+   │  │  └─ StatsPanel.jsx
+   │  ├─ pages/
+   │  │  ├─ Dashboard.jsx
+   │  │  └─ EmergencyRoute.jsx
+   │  ├─ styles/
+   │  │  └─ main.css
+   ├─ package.json
+   └─ vite.config.js
+
