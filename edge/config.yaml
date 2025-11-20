@@ -1,0 +1,16 @@
+camera:
+  source: "./test_videos/sample_road.mp4"   # file path or RTSP URL for testing
+model:
+  weights: "yolov8n.pt"   # download ultralytics weights and place in edge/ or use default
+  conf: 0.35
+rules:
+  preempt_cooldown: 8
+  pedestrian_hold_threshold: 3  # number of persons near crosswalk to hold signal
+publisher:
+  method: "http"   # http or mqtt
+  http:
+    url: "http://cloud:8080/event"
+  mqtt:
+    host: "broker"
+    port: 1883
+    topic: "mach10/events"
